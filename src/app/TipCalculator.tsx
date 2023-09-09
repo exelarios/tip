@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import CurrencyInput from "@/components/CurrencyInput";
 
@@ -102,11 +102,12 @@ function TipCalculator() {
             <label htmlFor="customTip" className={`my-auto justify-center flex font-bold rounded-md bg-gray-100 h-9 ${isCustomTip ? "bg-gray-200" : ""}`}>
               <input
                 id="customTip"
+                pattern="\d*"
                 type="text"
                 ref={customTipInput}
                 placeholder="Other"
                 value={isCustomTip ? tip : "other"}
-                className="text-right bg-transparent w-[1ch]"
+                className="text-right bg-transparent w-[4ch]"
                 onChange={handleSetCustomTipPercentage}
               />
               {

@@ -22,22 +22,18 @@ function CurrencyInput(props: CurrencyInputProps) {
     const target = event.target;
     const native = event.nativeEvent as InputEvent;
 
-    const start = target.selectionStart;
-    const end = target.selectionEnd;
-    console.log(start! - 2);
-    console.log(end! - 2);
+    // const start = target.selectionStart;
 
-    let value = target.value;
-    const token = value.charAt(value.length - 1);
+    const token = native.data;
 
     // Ensures only integers can get through
-    if (!Number.isInteger(parseInt(token))) {
+    if (token && !Number.isInteger(parseInt(token))) {
       return;
     }
 
     // inputType can either be "insertText" or "deleteContentBackward"
     if (native.inputType == "insertText") {
-      numbers.current.push(token);
+      numbers.current.push(token!);
     } else {
       numbers.current.pop();
     }
@@ -73,6 +69,7 @@ function CurrencyInput(props: CurrencyInputProps) {
     <input
       {...otherProps}
       type="text"
+      pattern="\d*"
       value={value}
       onChange={handleOnChange}
     />
